@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmm8ij17bey07"]
+
+[ext_resource type="Script" uid="uid://bdaw3wvbbpywi" path="res://scripts/audio-server.gd" id="1_0411k"]
+
+[node name="test-scene" type="Node2D"]
+
+[node name="Audio Server" type="Node2D" parent="."]
+script = ExtResource("1_0411k")
