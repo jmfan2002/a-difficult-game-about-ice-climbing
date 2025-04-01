@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://18cedgcxhw5p"]
+
+[ext_resource type="Texture2D" uid="uid://dwmiwbeqknkxd" path="res://assets/fuji.jpg" id="1_t7iv1"]
+[ext_resource type="Texture2D" uid="uid://eqkee12mx5s0" path="res://assets/icon.svg" id="2_2nifc"]
+[ext_resource type="Script" uid="uid://5m8b4ml04qcx" path="res://scripts/player.gd" id="2_wkftn"]
+[ext_resource type="Script" uid="uid://bxuyncxru4qh" path="res://scripts/left_arm.gd" id="4_wkftn"]
+[ext_resource type="Script" uid="uid://dkivpbm5otgto" path="res://right_arm.gd" id="5_q4iis"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Fuji" type="Sprite2D" parent="."]
+texture = ExtResource("1_t7iv1")
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("2_wkftn")
+
+[node name="Left_arm" type="Node2D" parent="Player"]
+script = ExtResource("4_wkftn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Left_arm"]
+position = Vector2(-200, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2nifc")
+
+[node name="Right_arm" type="Node2D" parent="Player"]
+script = ExtResource("5_q4iis")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Right_arm"]
+position = Vector2(200, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2nifc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(24, 4)
+texture = ExtResource("2_2nifc")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
