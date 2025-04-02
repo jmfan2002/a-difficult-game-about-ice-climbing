@@ -13,7 +13,7 @@ def main():
 	print(f"Received: '{data.decode()}' {recv_ip}:{recv_port}")
 
 if __name__ == "__main__":
-	while (1):
-		print("asdf")
 	main()
+	while True:
+		print("asdf")
 	
