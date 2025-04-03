@@ -1,7 +1,9 @@
 extends Node2D
 
 # selected audio device (set in each arm)
-var device_idx
+var device_idx: int
+
+var port: int
 
 # UDP server to receive data
 var server: UDPServer
@@ -30,7 +32,6 @@ func _clean_func(pipe_io: FileAccess, pipe_err: FileAccess, thread_io: Thread, t
 
 func _ready() -> void:
 	# create godot server
-	var port: int = 4242
 	server = UDPServer.new()
 	server.listen(port)
 	

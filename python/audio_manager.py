@@ -39,5 +39,5 @@ class AudioManager:
     def start(self):
         with sd.InputStream(channels=1, samplerate=self.samplerate, blocksize=self.block_size,
                             dtype='float32', callback=self._audio_callback, device=self.device_idx):
-            debug(f"Started listening... Press ENTER to stop.")
+            debug(f"Started listening on device {self.device_idx}... Press ENTER to stop.")
             input()

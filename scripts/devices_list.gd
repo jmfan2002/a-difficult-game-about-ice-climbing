@@ -16,7 +16,6 @@ func _ready() -> void:
 	var output: Array[String] = []
 	OS.execute(Global.python, ["-c", python_cmd], output)
 	var devices: Dictionary = JSON.parse_string(output.pop_back())
-	print(devices)
 	for name in devices:
 		add_item(name)
 		devices_lookup.push_back(devices[name])

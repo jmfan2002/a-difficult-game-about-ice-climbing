@@ -15,7 +15,6 @@ class UdpClient():
 		# Audio Manager
 		device_idx = int(sys.argv[2])
 		self.audio_manager = AudioManager(self.signal_callback, device_idx)
-		print(f"Connected to device {device_idx}")
 	
 	def start(self):
 		self.audio_manager.start()
