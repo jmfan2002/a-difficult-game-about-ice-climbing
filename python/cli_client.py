@@ -9,14 +9,19 @@ class CliClient():
     def start(self):
         self.audio_manager.start()
     
-    def signal_callback(self, signal):
-        match signal['type']:
-            case SignalType.PITCH_UP | SignalType.PITCH_DOWN:
-                print(f"\rSignal: {signal['type'].value}, Energy: {signal['rms']:.3f} Pitch: {signal['pitch']:.2f} Hz     ", end="", flush=True)
-            case SignalType.PITCH_NONE:
-                print(f"\rSignal: {signal['type'].value}, Pitch: -1 Hz     ", end="", flush=True)
-            case SignalType.CLAP | SignalType.SNAP:
-                print(f"\rDetected {signal['type'].value}! RMS: {signal['rms']:.4f}, Centroid: {signal['centroid']:.2f} Hz")
+    def signal_callback(self, signals):
+        for signal in signals:
+            match signal['type']:
+                case SignalType.PITCH_UP | SignalType.PITCH_DOWN:
+                    print(f"\rSignal: {signal['type'].value}, Pitch: {signal['pitch']:.2f} Hz     ", end="", flush=True)
+                case SignalType.PITCH_NONE:
+                    print(f"\rSignal: {signal['type'].value}, Pitch: -1 Hz     ", end="", flush=True)
+                case SignalType.VOL_UP | SignalType.VOL_DOWN:
+                    print(f"     Signal: {signal['type'].value}, Volume: {signal['rms']:.2f}     ", end="", flush=True)
+                case SignalType.VOL_NONE:
+                    print(f"     Signal: {signal['type'].value}, Volume: -1     ", end="", flush=True)
+                case SignalType.CLAP | SignalType.SNAP:
+                    print(f"\rDetected {signal['type'].value}! RMS: {signal['rms']:.4f}, Centroid: {signal['centroid']:.2f} Hz")
 
 if __name__ == "__main__":
     print("CLI client starting...")

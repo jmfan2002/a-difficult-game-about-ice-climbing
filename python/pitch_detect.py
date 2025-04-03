@@ -15,10 +15,6 @@ class PitchDetector():
         self.pitch_history = []
         self.history_length = 5  # number of previous blocks
 
-    def compute_rms(self, samples):
-        """Compute the root mean square energy of the signal."""
-        return np.sqrt(np.mean(samples**2))
-
     def _detect_pitch_autocorr(self, samples):
         """
         Detects pitch from a given audio signal using autocorrelation.
@@ -90,12 +86,7 @@ class PitchDetector():
         return pitch
 
     def detect(self, samples):
-        # check if min energy is hit (ie. someone is singing)
-        rms = self.compute_rms(samples)
-        if (rms < self.energy_threshold):
-            return {'type':SignalType.PITCH_NONE}
-
-        # if so, compute pitch
+        # compute pitch
         pitch = self._detect_pitch_autocorr(samples)
         self.pitch_history.append(pitch)
         if len(self.pitch_history) > self.history_length:
@@ -103,10 +94,9 @@ class PitchDetector():
 
         # ignore if this is the very first block
         if (len(self.pitch_history) < 2):
-            return {'type':SignalType.PITCH_NONE}
-        
-        if self.pitch_history[-1] > self.pitch_history[-2]:
+            signal = SignalType.PITCH_NONE
+        elif self.pitch_history[-1] > self.pitch_history[-2]:
             signal = SignalType.PITCH_UP
         else:
             signal = SignalType.PITCH_DOWN
-        return {'type':signal, 'pitch':pitch, 'rms':rms}
+        return {'type':signal, 'pitch':pitch}

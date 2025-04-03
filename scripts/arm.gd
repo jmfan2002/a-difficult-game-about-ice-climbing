@@ -4,15 +4,21 @@ extends Node2D
 var action
 var keyUp
 var keyDown
+var keyLeft
+var keyRight
 
-var audioUp = false
-var audioDown = false
+var pitchUp = false
+var pitchDown = false
+var volUp = false
+var volDown = false
 
 var arm_locked := false
 var velocity := 0
 
 const YMAX = -100
 const YMIN = 100
+const XMAX = 150
+const XMIN = -150
 const armVelocity = 1  # velocity that the arm moves when unlocked
 const pullVelocity = 1  # velocity contributed by the arm to the player's movement when locked 
 
@@ -37,15 +43,20 @@ func _process(_delta: float) -> void:
 
 	if not arm_locked:
 		# regular movement
-		if Input.is_key_pressed(keyUp) or audioUp:
+		if Input.is_key_pressed(keyUp) or pitchUp:
 			position.y = max(YMAX, position.y - armVelocity)
-		elif Input.is_key_pressed(keyDown) or audioDown:
+		elif Input.is_key_pressed(keyDown) or pitchDown:
 			position.y = min(YMIN, position.y + armVelocity)
+			
+		if Input.is_key_pressed(keyLeft) or volDown:
+			position.x = max(XMIN, position.x - armVelocity)
+		elif Input.is_key_pressed(keyRight) or volUp:
+			position.x = min(XMAX, position.x + armVelocity)
 	else:
 		# set velocity variable for player to use
-		if Input.is_key_pressed(keyUp) or audioUp:
+		if Input.is_key_pressed(keyUp) or pitchUp:
 			velocity = -pullVelocity
-		elif Input.is_key_pressed(keyDown) or audioDown:
+		elif Input.is_key_pressed(keyDown) or pitchDown:
 			velocity = pullVelocity
 		else:
 			velocity = 0

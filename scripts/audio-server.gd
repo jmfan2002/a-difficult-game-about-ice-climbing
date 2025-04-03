@@ -5,9 +5,6 @@ var device_idx: int
 
 var port: int
 
-# UDP server to receive data
-var server: UDPServer
-
 # arm control
 var arm
 var last_clap_snap: int = 0  # ms
@@ -18,7 +15,10 @@ func _thread_func(pipe: FileAccess, stream: String):
 	while pipe.is_open() and pipe.get_error() == OK:
 		var s = pipe.get_line()
 		if (pipe.get_error() == OK):
-			print("python ", stream, ": ", s)
+			if (stream == "stderr"):
+				print("python debug: ", s)
+			else:
+				handle_signal(s)
 
 func _clean_func(pipe_io: FileAccess, pipe_err: FileAccess, thread_io: Thread, thread_err: Thread):
 	print("closing...")
@@ -31,12 +31,8 @@ func _clean_func(pipe_io: FileAccess, pipe_err: FileAccess, thread_io: Thread, t
 	thread_err.wait_to_finish()
 
 func _ready() -> void:
-	# create godot server
-	server = UDPServer.new()
-	server.listen(port)
-	
 	# create python client
-	var python_script_path = ProjectSettings.globalize_path("res://python/udp_client.py")
+	var python_script_path = ProjectSettings.globalize_path("res://python/godot_client.py")
 	var res = OS.execute_with_pipe(Global.python, [python_script_path, str(port), str(device_idx)])
 	print("created client with pid %s" % res["pid"])
 	# create threads to listen to io/err streams
@@ -51,8 +47,11 @@ func _ready() -> void:
 func handle_signal(sig: String) -> void:
 	if (sig == "PITCH_NONE"):
 		# always handle pitch none events
-		arm.audioUp = false
-		arm.audioDown = false
+		arm.pitchUp = false
+		arm.pitchDown = false
+	elif (sig == "VOL_NONE"):
+		arm.volUp = false
+		arm.volDown = false
 	else:
 		var ts = Time.get_ticks_msec()
 		if (ts - last_clap_snap < clap_snap_timeout):
@@ -60,11 +59,17 @@ func handle_signal(sig: String) -> void:
 			return
 		match sig:
 			"PITCH_UP":
-				arm.audioUp = true
-				arm.audioDown = false
+				arm.pitchUp = true
+				arm.pitchDown = false
 			"PITCH_DOWN":
-				arm.audioUp = false
-				arm.audioDown = true
+				arm.pitchUp = false
+				arm.pitchDown = true
+			"VOL_UP":
+				arm.volUp = true
+				arm.volDown = false
+			"VOL_DOWN":
+				arm.volUp = false
+				arm.volDown = true
 			"CLAP":
 				arm.arm_locked = not arm.arm_locked
 				last_clap_snap = ts
@@ -73,14 +78,4 @@ func handle_signal(sig: String) -> void:
 				last_clap_snap = ts
 
 func _process(_delta: float) -> void:
-	server.poll()
-	if server.is_connection_available():
-		var peer: PacketPeerUDP = server.take_connection()
-		var packet = peer.get_packet()
-		var data = packet.get_string_from_utf8()
-		#print("Received: '%s' %s:%s" % [
-			#data,
-			#peer.get_packet_ip(),
-			#peer.get_packet_port()
-		#])
-		handle_signal(data)
+	pass
