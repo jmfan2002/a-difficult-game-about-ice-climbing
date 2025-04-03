@@ -57,7 +57,6 @@ func handle_signal(sig: String) -> void:
 		var ts = Time.get_ticks_msec()
 		if (ts - last_clap_snap < clap_snap_timeout):
 			# ignore all other events during the cooldown after a clap/snap
-			print("here")
 			return
 		match sig:
 			"PITCH_UP":

@@ -16,10 +16,11 @@ func _ready() -> void:
 	var output: Array[String] = []
 	OS.execute(Global.python, ["-c", python_cmd], output)
 	var devices: Dictionary = JSON.parse_string(output.pop_back())
-	for name in devices:
-		add_item(name)
-		devices_lookup.push_back(devices[name])
+	print(devices)
+	for device_name in devices:
+		add_item(device_name)
+		devices_lookup.push_back(devices[device_name])
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var items := get_selected_items()
 	selected_devices = Array(items).map(func(idx): return devices_lookup[idx])
