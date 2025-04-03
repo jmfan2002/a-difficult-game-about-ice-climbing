@@ -13,7 +13,9 @@ class UdpClient():
 		self.client_socket.settimeout(5)
 
 		# Audio Manager
-		self.audio_manager = AudioManager(self.signal_callback)
+		device_idx = int(sys.argv[2])
+		self.audio_manager = AudioManager(self.signal_callback, device_idx)
+		print(f"Connected to device {device_idx}")
 	
 	def start(self):
 		self.audio_manager.start()
@@ -26,6 +28,6 @@ class UdpClient():
 				self.client_socket.sendto(signal['type'].value.encode(), (self.ip, self.port))
 
 if __name__ == "__main__":
-	debug("UDP client starting...")
+	debug(f"UDP client starting, connected to device...")
 	client = UdpClient()
 	client.start()

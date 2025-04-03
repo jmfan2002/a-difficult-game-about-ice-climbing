@@ -1,5 +1,8 @@
 extends Node2D
 
+# selected audio device (set in each arm)
+var device_idx
+
 # UDP server to receive data
 var server: UDPServer
 
@@ -31,7 +34,7 @@ func _ready() -> void:
 	
 	# create python client
 	var python_script_path = ProjectSettings.globalize_path("res://python/udp_client.py")
-	var res = OS.execute_with_pipe("/Users/ethanpronev/miniconda3/bin/python3", [python_script_path, str(port)])
+	var res = OS.execute_with_pipe("python3", [python_script_path, str(port), str(device_idx)])
 	print("created client with pid %s" % res["pid"])
 	# create threads to listen to io/err streams
 	var thread_io = Thread.new()
@@ -40,8 +43,8 @@ func _ready() -> void:
 	thread_err.start(_thread_func.bind(res["stderr"], "stderr"))
 	get_window().close_requested.connect(_clean_func.bind(res["stdio"], res["stderr"], thread_io, thread_err))
 	
-	left_arm = get_node("../Player/Left_arm")
-	right_arm = get_node("../Player/Right_arm")
+	left_arm = get_node("../../Left_arm")
+	right_arm = get_node("../../Right_arm")
 
 func handle_signal(sig: String) -> void:
 	match sig:

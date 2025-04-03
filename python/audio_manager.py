@@ -5,7 +5,7 @@ from util import debug
 from signal import SignalType
 
 class AudioManager:
-    def __init__(self, signal_callback):
+    def __init__(self, signal_callback, device_idx):
         self.samplerate = 44100  # Hz
         self.block_size = 8192  # Samples per block
 
@@ -13,6 +13,7 @@ class AudioManager:
         self.clap_snap_detector = ClapSnapDetector(self.samplerate)
 
         self.signal_callback = signal_callback
+        self.device_idx = device_idx
     
     def _audio_callback(self, indata, frames, time, status):
         """
@@ -37,6 +38,6 @@ class AudioManager:
     
     def start(self):
         with sd.InputStream(channels=1, samplerate=self.samplerate, blocksize=self.block_size,
-                            dtype='float32', callback=self._audio_callback):
+                            dtype='float32', callback=self._audio_callback, device=self.device_idx):
             debug(f"Started listening... Press ENTER to stop.")
             input()

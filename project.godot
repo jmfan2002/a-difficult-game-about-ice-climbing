@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="A Difficult Game About Ice Climbing"
-run/main_scene="uid://18cedgcxhw5p"
+run/main_scene="uid://brgmmdxo246ar"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://assets/icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
 
 [display]
 
