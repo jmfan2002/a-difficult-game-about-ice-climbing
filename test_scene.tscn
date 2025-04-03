@@ -1,0 +1,169 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4qyuidc5sew0"]
+
+[ext_resource type="Texture2D" uid="uid://ct12ub2vjkaqp" path="res://assets/circle.png" id="1_ia1lp"]
+[ext_resource type="Texture2D" uid="uid://bxcw6a2nmpgv3" path="res://assets/square.png" id="2_sasra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pr8v"]
+size = Vector2(1216, 67)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2nij2"]
+radius = 26.0
+height = 192.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coq8p"]
+radius = 64.0176
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sasra"]
+radius = 13.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cbxl"]
+size = Vector2(84, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ia1lp"]
+radius = 12.0416
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(23, 308)
+shape = SubResource("RectangleShape2D_8pr8v")
+
+[node name="Ragdoll" type="Node2D" parent="."]
+
+[node name="Body" type="RigidBody2D" parent="Ragdoll"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Ragdoll/Body"]
+position = Vector2(1, 143)
+scale = Vector2(0.0595703, 0.164844)
+texture = ExtResource("1_ia1lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Body"]
+position = Vector2(1, 148)
+shape = SubResource("CapsuleShape2D_2nij2")
+
+[node name="Head" type="RigidBody2D" parent="Ragdoll"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Ragdoll/Head"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ia1lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Head"]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_coq8p")
+
+[node name="Camera2D" type="Camera2D" parent="Ragdoll/Head"]
+
+[node name="Right_arm" type="Node2D" parent="Ragdoll"]
+
+[node name="Right_fist" type="RigidBody2D" parent="Ragdoll/Right_arm"]
+position = Vector2(-11.645, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ragdoll/Right_arm/Right_fist"]
+position = Vector2(119, 49)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_ia1lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Right_arm/Right_fist"]
+position = Vector2(119, 49)
+shape = SubResource("CircleShape2D_sasra")
+
+[node name="Right_forearm" type="RigidBody2D" parent="Ragdoll/Right_arm"]
+position = Vector2(238.225, 20)
+rotation = 1.5708
+
+[node name="Segment" type="Sprite2D" parent="Ragdoll/Right_arm/Right_forearm"]
+position = Vector2(70.875, 131)
+scale = Vector2(0.164551, 0.0214843)
+texture = ExtResource("2_sasra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Right_arm/Right_forearm"]
+position = Vector2(71, 131)
+shape = SubResource("RectangleShape2D_7cbxl")
+
+[node name="Right_upper_arm" type="RigidBody2D" parent="Ragdoll/Right_arm"]
+
+[node name="Segment" type="Sprite2D" parent="Ragdoll/Right_arm/Right_upper_arm"]
+position = Vector2(70.875, 131)
+scale = Vector2(0.164551, 0.0214843)
+texture = ExtResource("2_sasra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Right_arm/Right_upper_arm"]
+position = Vector2(71, 131)
+shape = SubResource("RectangleShape2D_7cbxl")
+
+[node name="Left_arm" type="Node2D" parent="Ragdoll"]
+
+[node name="Left_fist" type="RigidBody2D" parent="Ragdoll/Left_arm"]
+position = Vector2(-235.485, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ragdoll/Left_arm/Left_fist"]
+position = Vector2(130.485, 49)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_ia1lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Left_arm/Left_fist"]
+position = Vector2(130.485, 49)
+shape = SubResource("CircleShape2D_ia1lp")
+
+[node name="Left_forearm" type="RigidBody2D" parent="Ragdoll/Left_arm"]
+position = Vector2(26.215, 20)
+rotation = 1.5708
+
+[node name="Segment" type="Sprite2D" parent="Ragdoll/Left_arm/Left_forearm"]
+position = Vector2(70.875, 131)
+scale = Vector2(0.164551, 0.0214843)
+texture = ExtResource("2_sasra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Left_arm/Left_forearm"]
+position = Vector2(71, 131)
+shape = SubResource("RectangleShape2D_7cbxl")
+
+[node name="Left_upper_arm" type="RigidBody2D" parent="Ragdoll/Left_arm"]
+position = Vector2(-138.975, 0)
+
+[node name="Segment" type="Sprite2D" parent="Ragdoll/Left_arm/Left_upper_arm"]
+position = Vector2(70.875, 131)
+scale = Vector2(0.164551, 0.0214843)
+texture = ExtResource("2_sasra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ragdoll/Left_arm/Left_upper_arm"]
+position = Vector2(71, 131)
+shape = SubResource("RectangleShape2D_7cbxl")
+
+[node name="Joints" type="Node2D" parent="Ragdoll"]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Ragdoll/Joints"]
+node_a = NodePath("../../Body")
+node_b = NodePath("../../Head")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(-25, 130)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../Left_arm/Left_upper_arm")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(29, 130)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../Right_arm/Right_upper_arm")
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(-105, 130)
+node_a = NodePath("../../Left_arm/Left_forearm")
+node_b = NodePath("../../Left_arm/Left_upper_arm")
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(107, 130)
+node_a = NodePath("../../Right_arm/Right_forearm")
+node_b = NodePath("../../Right_arm/Right_upper_arm")
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(-104, 51)
+node_a = NodePath("../../Left_arm/Left_fist")
+node_b = NodePath("../../Left_arm/Left_forearm")
+
+[node name="PinJoint2D7" type="PinJoint2D" parent="Ragdoll/Joints"]
+position = Vector2(107, 50)
+node_a = NodePath("../../Right_arm/Right_fist")
+node_b = NodePath("../../Right_arm/Right_forearm")

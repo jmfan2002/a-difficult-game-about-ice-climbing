@@ -1,13 +1,12 @@
 extends Node2D
 
-var left_arm
-var right_arm
+@onready var left_arm := $Left_arm
+@onready var right_arm := $Right_arm
 
 var fallVelocity = 10
 
 func _ready() -> void:
-	left_arm = get_node("Left_arm")
-	right_arm = get_node("Right_arm")
+	pass
 
 func _process(_delta: float) -> void:
 	var unlocked = not left_arm.arm_locked and not right_arm.arm_locked
