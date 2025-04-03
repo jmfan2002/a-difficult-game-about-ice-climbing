@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://18cedgcxhw5p"]
+[gd_scene load_steps=16 format=3 uid="uid://18cedgcxhw5p"]
 
+[ext_resource type="Texture2D" uid="uid://cuibwtym00ew6" path="res://assets/course_circle.svg" id="1_faw0r"]
 [ext_resource type="Texture2D" uid="uid://dwmiwbeqknkxd" path="res://assets/fuji.jpg" id="1_t7iv1"]
 [ext_resource type="Script" uid="uid://5m8b4ml04qcx" path="res://scripts/player.gd" id="2_wkftn"]
 [ext_resource type="Script" uid="uid://bxuyncxru4qh" path="res://scripts/left_arm.gd" id="4_wkftn"]
@@ -8,41 +9,248 @@
 [ext_resource type="Script" uid="uid://bdhxt3jsjtibh" path="res://scripts/right_audio_server.gd" id="7_faw0r"]
 [ext_resource type="Texture2D" uid="uid://ct12ub2vjkaqp" path="res://assets/circle.png" id="8_2eouu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qegb"]
+size = Vector2(619, 2315)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2eouu"]
+radius = 532.094
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_faw0r"]
+size = Vector2(1897, 401)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eouu"]
+size = Vector2(1702, 303)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rccsh"]
+radius = 42.9716
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qegb"]
+radius = 32.1403
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_faw0r"]
+radius = 32.1403
+
 [node name="Level" type="Node2D"]
 
+[node name="Course" type="Node2D" parent="."]
+
+[node name="Start" type="Area2D" parent="Course"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Start"]
+position = Vector2(-4.02435, -747.5)
+shape = SubResource("RectangleShape2D_4qegb")
+
+[node name="ColorRect" type="ColorRect" parent="Course/Start"]
+offset_left = -308.0
+offset_top = -1898.0
+offset_right = 313.0
+offset_bottom = 406.0
+color = Color(3.94672e-06, 0.473642, 0.674571, 1)
+
+[node name="Circle" type="Area2D" parent="Course"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Circle"]
+position = Vector2(207.476, -1904)
+shape = SubResource("CircleShape2D_2eouu")
+
+[node name="CourseCircle" type="Sprite2D" parent="Course/Circle"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+position = Vector2(206.476, -1901)
+scale = Vector2(1.74159, 1.74159)
+texture = ExtResource("1_faw0r")
+
+[node name="Bridge" type="Area2D" parent="Course"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bridge"]
+position = Vector2(1335.98, -2219.5)
+shape = SubResource("RectangleShape2D_faw0r")
+
+[node name="ColorRect" type="ColorRect" parent="Course/Bridge"]
+offset_left = 197.476
+offset_top = -2421.0
+offset_right = 2285.48
+offset_bottom = -2013.0
+color = Color(0, 0.47451, 0.67451, 1)
+
+[node name="Drop" type="Area2D" parent="Course"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Drop"]
+position = Vector2(3645.48, -1400.94)
+shape = SubResource("RectangleShape2D_2eouu")
+
+[node name="ColorRect" type="ColorRect" parent="Course/Drop"]
+offset_left = 2799.48
+offset_top = -1548.44
+offset_right = 4494.48
+offset_bottom = -1245.44
+color = Color(0, 0.47451, 0.67451, 1)
+
+[node name="Bouldering" type="Node2D" parent="Course"]
+
+[node name="Rock3" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(4234.77, -1987.11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock3"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock3"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock2" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(3992.55, -1856.35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock2"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock2"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(4376.25, -1727.73)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock10" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(3988.63, -3221.09)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock10"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock10"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock9" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(4003.27, -2795.24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock9"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock9"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock8" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(3662.43, -2724.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock8"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock8"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock7" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(4275.5, -2600.18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock7"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock7"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock6" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(3945.39, -2420.11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock6"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock6"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock5" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(4296.94, -2242.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock5"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock5"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Rock4" type="Area2D" parent="Course/Bouldering"]
+position = Vector2(3746.03, -2115.72)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Bouldering/Rock4"]
+shape = SubResource("CircleShape2D_rccsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Course/Bouldering/Rock4"]
+modulate = Color(0, 0.47451, 0.67451, 1)
+scale = Vector2(0.14545, 0.14545)
+texture = ExtResource("1_faw0r")
+
+[node name="Reach" type="Area2D" parent="."]
+position = Vector2(3947.04, -3794)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reach"]
+shape = SubResource("RectangleShape2D_2eouu")
+
+[node name="ColorRect" type="ColorRect" parent="Reach"]
+offset_left = -844.749
+offset_top = -151.396
+offset_right = 850.251
+offset_bottom = 151.604
+color = Color(0, 0.47451, 0.67451, 1)
+
 [node name="Fuji" type="Sprite2D" parent="."]
+position = Vector2(-8.00003, 331)
+scale = Vector2(0.438, 0.042654)
 texture = ExtResource("1_t7iv1")
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("2_wkftn")
 
-[node name="Left_arm" type="Node2D" parent="Player"]
+[node name="Left_arm" type="Area2D" parent="Player"]
+position = Vector2(-200, 0)
 script = ExtResource("4_wkftn")
 
 [node name="Line2D" type="Line2D" parent="Player/Left_arm"]
 default_color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Left_arm"]
-position = Vector2(-200, 0)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("8_2eouu")
 
 [node name="Audio_server" type="Node2D" parent="Player/Left_arm"]
 script = ExtResource("5_4qegb")
 
-[node name="Right_arm" type="Node2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Left_arm"]
+shape = SubResource("CircleShape2D_4qegb")
+
+[node name="Right_arm" type="Area2D" parent="Player"]
+position = Vector2(200, 0)
 script = ExtResource("5_q4iis")
 
 [node name="Line2D" type="Line2D" parent="Player/Right_arm"]
 default_color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Right_arm"]
-position = Vector2(200, 0)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("8_2eouu")
 
 [node name="Audio_server" type="Node2D" parent="Player/Right_arm"]
 script = ExtResource("7_faw0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Right_arm"]
+shape = SubResource("CircleShape2D_faw0r")
 
 [node name="Head" type="Sprite2D" parent="Player"]
 position = Vector2(-1, -93)
@@ -67,3 +275,8 @@ scale = Vector2(0.0429687, 0.131643)
 texture = ExtResource("8_2eouu")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[connection signal="area_entered" from="Player/Left_arm" to="Player/Left_arm" method="_on_area_entered"]
+[connection signal="area_exited" from="Player/Left_arm" to="Player/Left_arm" method="_on_area_exited"]
+[connection signal="area_entered" from="Player/Right_arm" to="Player/Right_arm" method="_on_area_entered"]
+[connection signal="area_exited" from="Player/Right_arm" to="Player/Right_arm" method="_on_area_exited"]

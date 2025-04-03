@@ -6,3 +6,7 @@ func _init() -> void:
 	keyDown = KEY_DOWN
 	keyLeft = KEY_LEFT
 	keyRight = KEY_RIGHT
+	YMAX = -220
+	YMIN = 200
+	XMAX = 350
+	XMIN = 20

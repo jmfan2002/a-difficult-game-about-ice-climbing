@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 @onready var line := $Line2D
 @onready var sprite := $Sprite2D
@@ -9,6 +9,10 @@ var keyUp
 var keyDown
 var keyLeft
 var keyRight
+var YMAX 
+var YMIN
+var XMAX
+var XMIN 
 
 var pitchUp = false
 var pitchDown = false
@@ -19,13 +23,10 @@ var arm_locked := false
 var velocityX := 0
 var velocityY := 0
 
-const YMAX = -100
-const YMIN = 100
-const XMAX = 150
-const XMIN = -150
-const armVelocity = 3  # velocity that the arm moves when unlocked
-const pullVelocity = 3  # velocity contributed by the arm to the player's movement when locked 
+const armVelocity = 5  # velocity that the arm moves when unlocked
+const pullVelocity = 5  # velocity contributed by the arm to the player's movement when locked 
 
+# for generating the arm line
 const SEGMENTS := 20  # how many points in the noodle
 const DROOP := 40     # how much it sags in the middle
 const LAG := 100.0      # smoothness (lower is slower)
@@ -59,7 +60,8 @@ func move_position(x: int, y: int) -> void:
 		position.y = max(YMAX, min(YMIN, position.y))
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed(action):
+	# only lockable if the character is overlapping with a lockable wall
+	if Input.is_action_just_pressed(action) and has_overlapping_areas():
 		arm_locked = not arm_locked
 		
 	# red if locked
