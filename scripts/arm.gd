@@ -16,18 +16,19 @@ var volUp = false
 var volDown = false
 
 var arm_locked := false
-var velocity := 0
+var velocityX := 0
+var velocityY := 0
 
 const YMAX = -100
 const YMIN = 100
 const XMAX = 150
 const XMIN = -150
-const armVelocity = 1  # velocity that the arm moves when unlocked
-const pullVelocity = 1  # velocity contributed by the arm to the player's movement when locked 
+const armVelocity = 3  # velocity that the arm moves when unlocked
+const pullVelocity = 3  # velocity contributed by the arm to the player's movement when locked 
 
 const SEGMENTS := 20  # how many points in the noodle
 const DROOP := 40     # how much it sags in the middle
-const LAG := 8.0      # smoothness (higher is slower)
+const LAG := 100.0      # smoothness (lower is slower)
 var points := []
 
 func _ready() -> void:
@@ -50,9 +51,11 @@ func _physics_process(delta):
 	line.points = points.map(func(p): return to_local(p))
 
 # moves opposite from the player if locked
-func move_position(dist: int) -> void:
+func move_position(x: int, y: int) -> void:
 	if arm_locked:
-		position.y -= dist
+		position.x -= x
+		position.x = min(XMAX, max(XMIN, position.x))
+		position.y -= y
 		position.y = max(YMAX, min(YMIN, position.y))
 
 func _process(_delta: float) -> void:
@@ -79,8 +82,15 @@ func _process(_delta: float) -> void:
 	else:
 		# set velocity variable for player to use
 		if Input.is_key_pressed(keyUp) or pitchUp:
-			velocity = -pullVelocity
+			velocityY = -pullVelocity
 		elif Input.is_key_pressed(keyDown) or pitchDown:
-			velocity = pullVelocity
+			velocityY = pullVelocity
 		else:
-			velocity = 0
+			velocityY = 0
+
+		if Input.is_key_pressed(keyLeft) or volDown:
+			velocityX = -pullVelocity
+		elif Input.is_key_pressed(keyRight) or volUp:
+			velocityX = pullVelocity
+		else:
+			velocityX = 0
