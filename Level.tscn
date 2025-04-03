@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://18cedgcxhw5p"]
+[gd_scene load_steps=7 format=3 uid="uid://18cedgcxhw5p"]
 
 [ext_resource type="Texture2D" uid="uid://dwmiwbeqknkxd" path="res://assets/fuji.jpg" id="1_t7iv1"]
 [ext_resource type="Texture2D" uid="uid://eqkee12mx5s0" path="res://assets/icon.svg" id="2_2nifc"]
 [ext_resource type="Script" uid="uid://5m8b4ml04qcx" path="res://scripts/player.gd" id="2_wkftn"]
 [ext_resource type="Script" uid="uid://bxuyncxru4qh" path="res://scripts/left_arm.gd" id="4_wkftn"]
-[ext_resource type="Script" uid="uid://dkivpbm5otgto" path="res://right_arm.gd" id="5_q4iis"]
+[ext_resource type="Script" uid="uid://dkivpbm5otgto" path="res://scripts/right_arm.gd" id="5_q4iis"]
+[ext_resource type="Script" uid="uid://bdaw3wvbbpywi" path="res://scripts/audio-server.gd" id="6_m3clv"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,7 +32,10 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_2nifc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(24, 4)
+position = Vector2(0, 4)
 texture = ExtResource("2_2nifc")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="AudioServer" type="Node2D" parent="."]
+script = ExtResource("6_m3clv")
