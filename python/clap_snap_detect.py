@@ -15,31 +15,31 @@ class ClapSnapDetector():
         self.energy_history = []
         self.history_length = 5  # number of previous blocks to average
     
-    def compute_rms(self, signal):
+    def compute_rms(self, samples):
         """Compute the root mean square energy of the signal."""
-        return np.sqrt(np.mean(signal**2))
+        return np.sqrt(np.mean(samples**2))
 
-    def compute_spectral_centroid(self, signal):
+    def compute_spectral_centroid(self, samples):
         """
         Compute the spectral centroid of a signal.
         The spectral centroid indicates the "brightness" of a sound.
         """
         # Apply a Hanning window to reduce spectral leakage.
-        window = np.hanning(len(signal))
-        windowed_signal = signal * window
+        window = np.hanning(len(samples))
+        windowed_samples = samples * window
 
         # Compute the FFT magnitude spectrum
-        fft_vals = np.abs(np.fft.rfft(windowed_signal))
+        fft_vals = np.abs(np.fft.rfft(windowed_samples))
         # Frequency bins corresponding to the FFT
-        freqs = np.fft.rfftfreq(len(signal), d=1.0/self.samplerate)
+        freqs = np.fft.rfftfreq(len(samples), d=1.0/self.samplerate)
         if np.sum(fft_vals) == 0:
             return 0
         centroid = np.sum(freqs * fft_vals) / np.sum(fft_vals)
         return centroid
 
-    def detect(self, signal):
+    def detect(self, samples):
         # Compute the RMS energy of the current block
-        rms = self.compute_rms(signal)
+        rms = self.compute_rms(samples)
         
         # Update the energy history and compute a moving average
         self.energy_history.append(rms)
@@ -50,7 +50,7 @@ class ClapSnapDetector():
         # Only consider this block if it's a sudden (transient) spike in energy.
         # This helps avoid detecting continuous sounds (like speech).
         if rms > self.energy_threshold and rms > self.transient_factor * avg_energy:
-            centroid = self.compute_spectral_centroid(signal)
+            centroid = self.compute_spectral_centroid(samples)
             
             # Decide if the event is a snap (higher spectral centroid) or a clap.
             if centroid < self.voice_threshold:

@@ -20,7 +20,9 @@ class UdpClient():
 	
 	def signal_callback(self, signal):
 		match signal['type']:
-			case SignalType.CLAP | SignalType.SNAP:
+			case SignalType.NO_CLAP_SNAP:
+				pass
+			case _:
 				self.client_socket.sendto(signal['type'].value.encode(), (self.ip, self.port))
 
 if __name__ == "__main__":

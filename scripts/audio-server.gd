@@ -3,6 +3,9 @@ extends Node2D
 # UDP server to receive data
 var server: UDPServer
 
+var left_arm
+var right_arm
+
 func _thread_func(pipe: FileAccess, stream: String):
 	# read pipe and print
 	while pipe.is_open() and pipe.get_error() == OK:
@@ -36,14 +39,35 @@ func _ready() -> void:
 	thread_io.start(_thread_func.bind(res["stdio"], "stdio"))
 	thread_err.start(_thread_func.bind(res["stderr"], "stderr"))
 	get_window().close_requested.connect(_clean_func.bind(res["stdio"], res["stderr"], thread_io, thread_err))
+	
+	left_arm = get_node("../Player/Left_arm")
+	right_arm = get_node("../Player/Right_arm")
+
+func handle_signal(sig: String) -> void:
+	match sig:
+		"PITCH_UP":
+			left_arm.audioUp = true
+			left_arm.audioDown = false
+		"PITCH_DOWN":
+			left_arm.audioUp = false
+			left_arm.audioDown = true
+		"PITCH_NONE":
+			left_arm.audioUp = false
+			left_arm.audioDown = false
+		"CLAP":
+			left_arm.arm_locked = not left_arm.arm_locked
+		"SNAP":
+			right_arm.arm_locked = not right_arm.arm_locked
 
 func _process(_delta: float) -> void:
 	server.poll()
 	if server.is_connection_available():
 		var peer: PacketPeerUDP = server.take_connection()
 		var packet = peer.get_packet()
-		print("Received: '%s' %s:%s" % [
-			packet.get_string_from_utf8(),
-			peer.get_packet_ip(),
-			peer.get_packet_port()
-		])
+		var data = packet.get_string_from_utf8()
+		#print("Received: '%s' %s:%s" % [
+			#data,
+			#peer.get_packet_ip(),
+			#peer.get_packet_port()
+		#])
+		handle_signal(data)

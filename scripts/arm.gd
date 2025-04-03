@@ -5,13 +5,16 @@ var action
 var keyUp
 var keyDown
 
+var audioUp = false
+var audioDown = false
+
 var arm_locked := false
 var velocity := 0
 
 const YMAX = -100
 const YMIN = 100
-const armVelocity = 10  # velocity that the arm moves when unlocked
-const pullVelocity = 10  # velocity contributed by the arm to the player's movement when locked 
+const armVelocity = 1  # velocity that the arm moves when unlocked
+const pullVelocity = 1  # velocity contributed by the arm to the player's movement when locked 
 
 func _ready() -> void:
 	pass
@@ -34,15 +37,15 @@ func _process(_delta: float) -> void:
 
 	if not arm_locked:
 		# regular movement
-		if Input.is_key_pressed(keyUp):
+		if Input.is_key_pressed(keyUp) or audioUp:
 			position.y = max(YMAX, position.y - armVelocity)
-		elif Input.is_key_pressed(keyDown):
+		elif Input.is_key_pressed(keyDown) or audioDown:
 			position.y = min(YMIN, position.y + armVelocity)
 	else:
 		# set velocity variable for player to use
-		if Input.is_key_pressed(keyUp):
+		if Input.is_key_pressed(keyUp) or audioUp:
 			velocity = -pullVelocity
-		elif Input.is_key_pressed(keyDown):
+		elif Input.is_key_pressed(keyDown) or audioDown:
 			velocity = pullVelocity
 		else:
 			velocity = 0

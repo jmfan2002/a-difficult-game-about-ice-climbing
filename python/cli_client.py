@@ -12,7 +12,7 @@ class CliClient():
     def signal_callback(self, signal):
         match signal['type']:
             case SignalType.PITCH_UP | SignalType.PITCH_DOWN:
-                print(f"\rSignal: {signal['type'].value}, Pitch: {signal['pitch']:.2f} Hz     ", end="", flush=True)
+                print(f"\rSignal: {signal['type'].value}, Energy: {signal['rms']:.3f} Pitch: {signal['pitch']:.2f} Hz     ", end="", flush=True)
             case SignalType.PITCH_NONE:
                 print(f"\rSignal: {signal['type'].value}, Pitch: -1 Hz     ", end="", flush=True)
             case SignalType.CLAP | SignalType.SNAP:

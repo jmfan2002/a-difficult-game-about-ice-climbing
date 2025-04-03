@@ -2,6 +2,7 @@ import sounddevice as sd
 from pitch_detect import PitchDetector
 from clap_snap_detect import ClapSnapDetector
 from util import debug
+from signal import SignalType
 
 class AudioManager:
     def __init__(self, signal_callback):
@@ -28,8 +29,10 @@ class AudioManager:
         clap_snap_signal = self.clap_snap_detector.detect(samples)
 
         # Send to client callback
-        self.signal_callback(pitch_signal)
-        self.signal_callback(clap_snap_signal)
+        if (clap_snap_signal['type'] != SignalType.NO_CLAP_SNAP):
+            self.signal_callback(clap_snap_signal)
+        else:
+            self.signal_callback(pitch_signal)
         
     
     def start(self):
