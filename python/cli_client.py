@@ -4,7 +4,7 @@ from signal import SignalType
 class CliClient():
     def __init__(self):
         # Audio Manager
-        self.audio_manager = AudioManager(self.signal_callback)
+        self.audio_manager = AudioManager(self.signal_callback, None)
     
     def start(self):
         self.audio_manager.start()

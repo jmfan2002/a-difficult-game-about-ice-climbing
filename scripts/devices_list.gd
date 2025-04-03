@@ -14,7 +14,7 @@ func _ready() -> void:
 	clear()
 
 	var output: Array[String] = []
-	OS.execute("python", ["-c", python_cmd], output)
+	OS.execute(Global.python, ["-c", python_cmd], output)
 	var devices: Dictionary = JSON.parse_string(output.pop_back())
 	print(devices)
 	for name in devices:
