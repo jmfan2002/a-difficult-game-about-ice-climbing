@@ -39,60 +39,6 @@ radius = 32.1403
 [sub_resource type="Animation" id="Animation_m0xki"]
 length = 0.001
 
-[sub_resource type="Animation" id="Animation_xe3hh"]
-resource_name = "right_axe_unlock"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Right_arm/Axe:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Right_arm/Crack:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0332769),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_sv41r"]
-resource_name = "right_axe"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Right_arm/Axe:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -1.22173]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Right_arm/Crack:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0332769),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="Animation" id="Animation_ax7ne"]
 resource_name = "left_axe_lock"
 tracks/0/type = "value"
@@ -142,6 +88,60 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.033),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sv41r"]
+resource_name = "right_axe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right_arm/Axe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.22173]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right_arm/Crack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0332769),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_xe3hh"]
+resource_name = "right_axe_unlock"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right_arm/Axe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right_arm/Crack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0332769),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -383,108 +383,6 @@ expand_mode = 1
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Player" type="Node2D" parent="."]
-script = ExtResource("2_wkftn")
-
-[node name="Left_arm" type="Area2D" parent="Player"]
-position = Vector2(-150, 0)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("4_wkftn")
-
-[node name="Line2D" type="Line2D" parent="Player/Left_arm"]
-default_color = Color(0, 0, 0, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Left_arm"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("8_2eouu")
-
-[node name="Audio_server" type="Node2D" parent="Player/Left_arm"]
-script = ExtResource("5_4qegb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Left_arm"]
-shape = SubResource("CircleShape2D_4qegb")
-
-[node name="Axe" type="Sprite2D" parent="Player/Left_arm"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.131836, 0.131836)
-texture = ExtResource("10_rccsh")
-offset = Vector2(-57.14, -49.005)
-flip_h = true
-
-[node name="Crack" type="Sprite2D" parent="Player/Left_arm"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-position = Vector2(62, -8)
-scale = Vector2(0.083, 0.083)
-texture = ExtResource("11_ax7ne")
-
-[node name="Right_arm" type="Area2D" parent="Player"]
-position = Vector2(150, 0)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("5_q4iis")
-
-[node name="Line2D" type="Line2D" parent="Player/Right_arm"]
-default_color = Color(0, 0, 0, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Right_arm"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("8_2eouu")
-
-[node name="Audio_server" type="Node2D" parent="Player/Right_arm"]
-script = ExtResource("7_faw0r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Right_arm"]
-shape = SubResource("CircleShape2D_faw0r")
-
-[node name="Axe" type="Sprite2D" parent="Player/Right_arm"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.131836, 0.131836)
-texture = ExtResource("10_rccsh")
-offset = Vector2(57.205, -49.005)
-
-[node name="Crack" type="Sprite2D" parent="Player/Right_arm"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-60.75, -9.25)
-scale = Vector2(0.0834961, 0.0834961)
-texture = ExtResource("11_ax7ne")
-
-[node name="Head" type="Sprite2D" parent="Player"]
-position = Vector2(-1.36424e-12, -59)
-scale = Vector2(0.0539063, 0.0539063)
-texture = ExtResource("8_2eouu")
-
-[node name="Body" type="Sprite2D" parent="Player"]
-position = Vector2(5.96046e-08, 29)
-scale = Vector2(0.0351563, 0.1)
-texture = ExtResource("8_2eouu")
-
-[node name="Right_leg" type="Sprite2D" parent="Player"]
-position = Vector2(15, 114)
-rotation = -0.0767945
-scale = Vector2(0.0210616, 0.0604377)
-texture = ExtResource("8_2eouu")
-
-[node name="Left_leg" type="Sprite2D" parent="Player"]
-position = Vector2(-13, 113)
-rotation = 0.0767945
-scale = Vector2(0.0202784, 0.0621269)
-texture = ExtResource("8_2eouu")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Reset" type="Button" parent="Player/Camera2D"]
-offset_left = -612.0
-offset_top = 229.0
-offset_right = -280.0
-offset_bottom = 330.0
-text = "Reset?"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-libraries = {
-&"": SubResource("AnimationLibrary_p6oy6")
-}
-
 [node name="Ground" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
@@ -616,6 +514,133 @@ texture = ExtResource("14_opqd1")
 position = Vector2(481, 241)
 scale = Vector2(0.243042, 0.242065)
 texture = ExtResource("14_opqd1")
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("2_wkftn")
+
+[node name="Left_arm" type="Area2D" parent="Player"]
+position = Vector2(-150, 0)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("4_wkftn")
+
+[node name="Line2D" type="Line2D" parent="Player/Left_arm"]
+default_color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Left_arm"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("8_2eouu")
+
+[node name="Audio_server" type="Node2D" parent="Player/Left_arm"]
+script = ExtResource("5_4qegb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Left_arm"]
+shape = SubResource("CircleShape2D_4qegb")
+
+[node name="Axe" type="Sprite2D" parent="Player/Left_arm"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.131836, 0.131836)
+texture = ExtResource("10_rccsh")
+offset = Vector2(-57.14, -49.005)
+flip_h = true
+
+[node name="Crack" type="Sprite2D" parent="Player/Left_arm"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(62, -8)
+scale = Vector2(0.083, 0.083)
+texture = ExtResource("11_ax7ne")
+
+[node name="Right_arm" type="Area2D" parent="Player"]
+position = Vector2(150, 0)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("5_q4iis")
+
+[node name="Line2D" type="Line2D" parent="Player/Right_arm"]
+default_color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Right_arm"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("8_2eouu")
+
+[node name="Audio_server" type="Node2D" parent="Player/Right_arm"]
+script = ExtResource("7_faw0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Right_arm"]
+shape = SubResource("CircleShape2D_faw0r")
+
+[node name="Axe" type="Sprite2D" parent="Player/Right_arm"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.131836, 0.131836)
+texture = ExtResource("10_rccsh")
+offset = Vector2(57.205, -49.005)
+
+[node name="Crack" type="Sprite2D" parent="Player/Right_arm"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-60.75, -9.25)
+scale = Vector2(0.0834961, 0.0834961)
+texture = ExtResource("11_ax7ne")
+
+[node name="Head" type="Sprite2D" parent="Player"]
+position = Vector2(-1.36424e-12, -59)
+scale = Vector2(0.0539063, 0.0539063)
+texture = ExtResource("8_2eouu")
+
+[node name="Body" type="Sprite2D" parent="Player"]
+position = Vector2(5.96046e-08, 29)
+scale = Vector2(0.0351563, 0.1)
+texture = ExtResource("8_2eouu")
+
+[node name="Right_leg" type="Sprite2D" parent="Player"]
+position = Vector2(15, 114)
+rotation = -0.0767945
+scale = Vector2(0.0210616, 0.0604377)
+texture = ExtResource("8_2eouu")
+
+[node name="Left_leg" type="Sprite2D" parent="Player"]
+position = Vector2(-13, 113)
+rotation = 0.0767945
+scale = Vector2(0.0202784, 0.0621269)
+texture = ExtResource("8_2eouu")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Reset" type="Button" parent="Player/Camera2D"]
+offset_left = -612.0
+offset_top = 229.0
+offset_right = -280.0
+offset_bottom = 330.0
+text = "Reset?"
+
+[node name="End_screen" type="Control" parent="Player/Camera2D"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Player/Camera2D/End_screen"]
+layout_mode = 0
+offset_left = -651.0
+offset_top = -369.0
+offset_right = 653.0
+offset_bottom = 372.0
+color = Color(0, 0, 0, 0.647059)
+
+[node name="End_text" type="Label" parent="Player/Camera2D/End_screen"]
+layout_mode = 0
+offset_left = -407.0
+offset_top = -70.0
+offset_right = 410.0
+offset_bottom = -21.0
+text = "Congratulations, you have summited the mountain!
+"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_p6oy6")
+}
 
 [connection signal="area_entered" from="Player/Left_arm" to="Player/Left_arm" method="_on_area_entered"]
 [connection signal="area_exited" from="Player/Left_arm" to="Player/Left_arm" method="_on_area_exited"]

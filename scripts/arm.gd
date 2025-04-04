@@ -22,6 +22,7 @@ var volUp = false
 var volDown = false
 
 var arm_locked := false
+var trigger_anim := false
 var velocityX := 0
 var velocityY := 0
 
@@ -62,42 +63,41 @@ func move_position(x: int, y: int) -> void:
 		position.y = max(YMAX, min(YMIN, position.y))
 
 func _process(_delta: float) -> void:
-	# only lockable if the character is overlapping with a lockable wall
-	if Input.is_action_just_pressed(action) and has_overlapping_areas():
-		arm_locked = not arm_locked
-		var anim_player: AnimationPlayer = get_node(^"/root/Level/Player/AnimationPlayer")
-		var anim := lock_anim if arm_locked else unlock_anim
-		anim_player.play(anim)
-		
-	# red if locked
-	if arm_locked:
-		$Sprite2D.modulate = Color(1, 0.2, 0.2)
-	else:
-		$Sprite2D.modulate = Color(1, 1, 1)
+	if not Global.done:
+		# only lockable if the character is overlapping with a lockable wall
+		if Input.is_action_just_pressed(action) and has_overlapping_areas():
+			trigger_anim = true
 
-	if not arm_locked:
-		# regular movement
-		if Input.is_key_pressed(keyUp) or pitchUp:
-			position.y = max(YMAX, position.y - armVelocity)
-		elif Input.is_key_pressed(keyDown) or pitchDown:
-			position.y = min(YMIN, position.y + armVelocity)
-			
-		if Input.is_key_pressed(keyLeft) or volDown:
-			position.x = max(XMIN, position.x - armVelocity)
-		elif Input.is_key_pressed(keyRight) or volUp:
-			position.x = min(XMAX, position.x + armVelocity)
-	else:
-		# set velocity variable for player to use
-		if Input.is_key_pressed(keyUp) or pitchUp:
-			velocityY = -pullVelocity
-		elif Input.is_key_pressed(keyDown) or pitchDown:
-			velocityY = pullVelocity
-		else:
-			velocityY = 0
+		if trigger_anim:
+			arm_locked = not arm_locked
+			var anim_player: AnimationPlayer = get_node(^"/root/Level/Player/AnimationPlayer")
+			var anim := lock_anim if arm_locked else unlock_anim
+			anim_player.play(anim)
+			trigger_anim = false
 
-		if Input.is_key_pressed(keyLeft) or volDown:
-			velocityX = -pullVelocity
-		elif Input.is_key_pressed(keyRight) or volUp:
-			velocityX = pullVelocity
+		if not arm_locked:
+			# regular movement
+			if Input.is_key_pressed(keyUp) or pitchUp:
+				position.y = max(YMAX, position.y - armVelocity)
+			elif Input.is_key_pressed(keyDown) or pitchDown:
+				position.y = min(YMIN, position.y + armVelocity)
+				
+			if Input.is_key_pressed(keyLeft) or volDown:
+				position.x = max(XMIN, position.x - armVelocity)
+			elif Input.is_key_pressed(keyRight) or volUp:
+				position.x = min(XMAX, position.x + armVelocity)
 		else:
-			velocityX = 0
+			# set velocity variable for player to use
+			if Input.is_key_pressed(keyUp) or pitchUp:
+				velocityY = -pullVelocity
+			elif Input.is_key_pressed(keyDown) or pitchDown:
+				velocityY = pullVelocity
+			else:
+				velocityY = 0
+
+			if Input.is_key_pressed(keyLeft) or volDown:
+				velocityX = -pullVelocity
+			elif Input.is_key_pressed(keyRight) or volUp:
+				velocityX = pullVelocity
+			else:
+				velocityX = 0

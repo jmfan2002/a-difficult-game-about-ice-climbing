@@ -6,7 +6,7 @@ var device_idx: int
 var port: int
 
 # arm control
-var arm
+var arm: Area2D
 var last_clap_snap: int = 0  # ms
 const clap_snap_timeout: int = 500  # ms
 
@@ -71,11 +71,13 @@ func handle_signal(sig: String) -> void:
 				arm.volUp = false
 				arm.volDown = true
 			"CLAP":
-				arm.arm_locked = not arm.arm_locked
-				last_clap_snap = ts
+				if arm.has_overlapping_areas():
+					arm.trigger_anim = true
+					last_clap_snap = ts
 			"SNAP":
-				arm.arm_locked = not arm.arm_locked
-				last_clap_snap = ts
+				if arm.has_overlapping_areas():
+					arm.trigger_anim = true
+					last_clap_snap = ts
 
 func _process(_delta: float) -> void:
 	pass

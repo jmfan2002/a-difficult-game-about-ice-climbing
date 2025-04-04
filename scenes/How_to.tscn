@@ -16,6 +16,7 @@ script = ExtResource("1_ugplu")
 
 [node name="Background" type="Panel" parent="."]
 clip_contents = true
+layout_mode = 0
 offset_right = 1283.0
 offset_bottom = 724.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ttxn0")
