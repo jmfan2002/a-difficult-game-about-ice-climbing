@@ -6,7 +6,9 @@ func _init() -> void:
 	keyDown = KEY_S
 	keyLeft = KEY_A
 	keyRight = KEY_D
-	YMAX = -220
-	YMIN = 200
+	YMAX = -160
+	YMIN = 130
 	XMAX = -20
-	XMIN = -350
+	XMIN = -250
+	lock_anim = "left_axe_lock"
+	unlock_anim = "left_axe_unlock"

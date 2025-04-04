@@ -4,15 +4,17 @@ extends Area2D
 @onready var sprite := $Sprite2D
 
 # virtual vars set in each arm
-var action
-var keyUp
-var keyDown
-var keyLeft
-var keyRight
-var YMAX 
-var YMIN
-var XMAX
-var XMIN 
+var action: String
+var keyUp: Key
+var keyDown: Key
+var keyLeft: Key
+var keyRight: Key
+var YMAX: int
+var YMIN: int
+var XMAX: int
+var XMIN: int
+var lock_anim: String
+var unlock_anim: String
 
 var pitchUp = false
 var pitchDown = false
@@ -63,6 +65,9 @@ func _process(_delta: float) -> void:
 	# only lockable if the character is overlapping with a lockable wall
 	if Input.is_action_just_pressed(action) and has_overlapping_areas():
 		arm_locked = not arm_locked
+		var anim_player: AnimationPlayer = get_node(^"/root/Level/Player/AnimationPlayer")
+		var anim := lock_anim if arm_locked else unlock_anim
+		anim_player.play(anim)
 		
 	# red if locked
 	if arm_locked:

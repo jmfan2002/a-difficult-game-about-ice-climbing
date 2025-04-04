@@ -3,6 +3,8 @@ extends Node2D
 @onready var left_arm := $Left_arm
 @onready var right_arm := $Right_arm
 
+var on_ground := true
+
 var fallVelocity = 10
 
 func _ready() -> void:
@@ -42,3 +44,9 @@ func _process(_delta: float) -> void:
 	
 	# don't fall through the ground
 	position.y = min(0, position.y)
+	
+	on_ground = position.y == 0
+
+
+func _on_reset_pressed() -> void:
+	position = Vector2(0, 0)
