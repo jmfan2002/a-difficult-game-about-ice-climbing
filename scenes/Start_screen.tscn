@@ -61,4 +61,14 @@ offset_right = 816.0
 offset_bottom = 182.0
 text = "Please select 2 input devices to continue:"
 
+[node name="How_to_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 812.0
+offset_top = 592.0
+offset_right = 924.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 25
+text = "How to"
+
 [connection signal="pressed" from="Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="How_to_button" to="." method="_on_how_to_button_pressed"]

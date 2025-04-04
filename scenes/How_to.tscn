@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyangn2u0wu5"]
+
+[ext_resource type="Script" uid="uid://dco7krlnryadg" path="res://scripts/how_to.gd" id="1_ugplu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttxn0"]
+bg_color = Color(0.491664, 0.607615, 0.775621, 1)
+
+[node name="How_to" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ugplu")
+
+[node name="Background" type="Panel" parent="."]
+clip_contents = true
+offset_right = 1283.0
+offset_bottom = 724.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ttxn0")
+
+[node name="Back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 613.0
+offset_top = 601.0
+offset_right = 679.0
+offset_bottom = 644.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 145.0
+offset_right = 1074.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 20
+text = "This game is a coop game meant for 2 players to climb a mountain together.
+Each player will have control of an arm which can be controlled by singing into your mic.
+
+To move an arm up/down, raise/lower the pitch.
+To move an arm left/right, raise/lower the volume.
+
+You can activate your icepick by clapping, which will lock your hand in place.
+Your icepick can only be activated on top of ice.
+
+Good luck!"
+
+[connection signal="pressed" from="Back_button" to="." method="_on_back_button_pressed"]
