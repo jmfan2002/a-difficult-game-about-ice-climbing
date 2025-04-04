@@ -5,7 +5,9 @@ extends Node2D
 
 var on_ground := true
 
-const fallVelocity = 10
+const gravity = 0.2
+const defaultFallVelocity = 10
+var fallVelocity = 10
 const endHeight = -3600
 
 func _ready() -> void:
@@ -37,22 +39,26 @@ func _process(_delta: float) -> void:
 			left_arm.velocityX = 0
 			right_arm.velocityX = 0
 			velocityX = 0
-		
+
 		# set downwards movement to 0 if at the bottom
 		if velocityY > 0 and position.y == 0:
 			velocityY = 0
+			fallVelocity = defaultFallVelocity
 
 		if unlocked:
 			position.y += fallVelocity
+			if not on_ground:
+				fallVelocity += gravity
 		elif velocityY or velocityX:
+			fallVelocity = defaultFallVelocity
 			position.y += velocityY
 			position.x += velocityX
 			left_arm.move_position(velocityX, velocityY)
 			right_arm.move_position(velocityX, velocityY)
-		
+
 		# don't fall through the ground
 		position.y = min(0, position.y)
-		
+
 		on_ground = position.y == 0
 		if position.y < endHeight:
 			Global.done = true
