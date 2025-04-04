@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://18cedgcxhw5p"]
+[gd_scene load_steps=28 format=3 uid="uid://18cedgcxhw5p"]
 
 [ext_resource type="Script" uid="uid://chpmqn3lhdhtc" path="res://scripts/level.gd" id="1_2eouu"]
 [ext_resource type="Texture2D" uid="uid://cuibwtym00ew6" path="res://assets/course_circle.svg" id="1_faw0r"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c7hqpbtg8350j" path="res://assets/axe.png" id="10_rccsh"]
 [ext_resource type="Texture2D" uid="uid://k8ylmmcokn0l" path="res://assets/crack.png" id="11_ax7ne"]
 [ext_resource type="Texture2D" uid="uid://bj63en8larrnq" path="res://assets/ground.png" id="14_opqd1"]
+[ext_resource type="Texture2D" uid="uid://b57b853psgo20" path="res://assets/kilroy.svg" id="14_xe3hh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qegb"]
 size = Vector2(619, 2315)
@@ -361,6 +362,12 @@ texture = ExtResource("1_faw0r")
 
 [node name="Reach" type="Area2D" parent="Course"]
 position = Vector2(3431, -3688)
+
+[node name="Kilroy" type="Sprite2D" parent="Course/Reach"]
+position = Vector2(806, -151)
+rotation = 0.0261799
+scale = Vector2(0.0211121, 0.0211121)
+texture = ExtResource("14_xe3hh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Course/Reach"]
 shape = SubResource("RectangleShape2D_2eouu")
