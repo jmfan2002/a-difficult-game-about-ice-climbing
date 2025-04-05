@@ -1,10 +1,12 @@
 from audio_manager import AudioManager
 from signal import SignalType
+import sys
 
 class CliClient():
     def __init__(self):
         # Audio Manager
-        self.audio_manager = AudioManager(self.signal_callback, None)
+        device_idx = int(sys.argv[1]) if len(sys.argv) >= 2 else None
+        self.audio_manager = AudioManager(self.signal_callback, device_idx)
     
     def start(self):
         self.audio_manager.start()

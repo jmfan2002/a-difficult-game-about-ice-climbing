@@ -6,7 +6,7 @@ from util import debug, send_to_godot
 class GodotClient():
 	def __init__(self):
 		# Audio Manager
-		device_idx = int(sys.argv[2])
+		device_idx = int(sys.argv[1])
 		self.audio_manager = AudioManager(self.signal_callback, device_idx)
 	
 	def start(self):
@@ -14,6 +14,8 @@ class GodotClient():
 	
 	def signal_callback(self, signals):
 		for signal in signals:
+			if (signal['type'] in [SignalType.CLAP, SignalType.SNAP]):
+				debug("sending clap/snap")
 			match signal['type']:
 				case SignalType.NO_CLAP_SNAP:
 					continue

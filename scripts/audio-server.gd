@@ -3,8 +3,6 @@ extends Node2D
 # selected audio device (set in each arm)
 var device_idx: int
 
-var port: int
-
 # arm control
 var arm: Area2D
 var last_clap_snap: int = 0  # ms
@@ -33,7 +31,7 @@ func _clean_func(pipe_io: FileAccess, pipe_err: FileAccess, thread_io: Thread, t
 func _ready() -> void:
 	# create python client
 	var python_script_path = ProjectSettings.globalize_path("res://python/godot_client.py")
-	var res = OS.execute_with_pipe(Global.python, [python_script_path, str(port), str(device_idx)])
+	var res = OS.execute_with_pipe(Global.python, [python_script_path, str(device_idx)])
 	print("created client with pid %s" % res["pid"])
 	# create threads to listen to io/err streams
 	var thread_io = Thread.new()
