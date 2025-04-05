@@ -10,7 +10,7 @@ class ClapSnapDetector():
         
         self.spectral_centroid_threshold = 2800  # Frequency (Hz) threshold to distinguish snap vs. clap
         # seems like setting this to 0 allows for clapping while still singing
-        self.transient_factor = 0.0              # Require the block energy to be at least 2x the recent average
+        self.transient_factor = 2.0              # Require the block energy to be at least 2x the recent average
         self.voice_threshold = 2000              # Frequency (Hz) threshold to filter out vocal transients
 
         # To store energy of previous blocks to help decide if an event is transient
