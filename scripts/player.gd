@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 			left_arm.velocityY = 0
 			right_arm.velocityY = 0
 			velocityY = 0
-			
+
 		# set movement to 0 if on an edge
 		if velocityX > 0 and (left_arm.position.x == left_arm.XMIN and left_arm.arm_locked or right_arm.position.x == right_arm.XMIN and right_arm.arm_locked) or \
 		velocityX < 0 and (left_arm.arm_locked and left_arm.position.x == left_arm.XMAX or right_arm.arm_locked and right_arm.position.x == right_arm.XMAX):
